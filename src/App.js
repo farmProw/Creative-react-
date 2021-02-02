@@ -1,25 +1,41 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import Header from "./components/Header/Header";
+import Aside from "./components/Aside/Aside";
+import Content from "./components/Content/Content";
+import Footer from "./components/Footer/Footer";
+import {BrowserRouter, Route} from "react-router-dom";
+import Messages from "./components/Aside/NavBar/NavBarLinks/Messeges";
+import Music from "./components/Aside/NavBar/NavBarLinks/Music";
+import Settings from "./components/Aside/NavBar/NavBarLinks/Settings";
+import News from "./components/Aside/NavBar/NavBarLinks/News";
+import Friends from "./components/Aside/Friends/Friends";
+import state, {addPost, createBllMessage} from "./State/State";
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+function App(props) {
+    return (
+        <BrowserRouter>
+            <div className="wrapper">
+                <Header/>
+                <Aside state = {props.state}/>
+
+                <div className="wrapper__content">
+                    <Route path="/messages" render = {()=><Messages state = {props.state}
+                                                                    />}></Route>
+                    <Route path="/profile" render = {()=><Content state = {props.state}
+                                                                  addPost = {props.addPost}
+                                                                  sms = {state.sms}
+                                                                  createBllMessage = {props.createBllMessage}/>}></Route>
+                    <Route path="/news" render = {()=><News/>}></Route>
+                    <Route path="/music" render = {()=><Music/>}></Route>
+                    <Route path="/settings" render = {()=><Settings/>}></Route>
+                    <Route path="/friends" render = {()=><Friends state = {props.state}/>}></Route>
+                </div>
+                <Footer/>
+            </div>
+        </BrowserRouter>
+    )
+};
 
 export default App;
