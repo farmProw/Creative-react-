@@ -10,7 +10,6 @@ import Music from "./components/Aside/NavBar/NavBarLinks/Music";
 import Settings from "./components/Aside/NavBar/NavBarLinks/Settings";
 import News from "./components/Aside/NavBar/NavBarLinks/News";
 import Friends from "./components/Aside/Friends/Friends";
-import state, {addPost, createBllMessage} from "./State/State";
 import React from "react";
 
 function App(props) {
@@ -24,9 +23,9 @@ function App(props) {
                     <Route path="/messages" render = {()=><Messages state = {props.state}
                                                                     />}></Route>
                     <Route path="/profile" render = {()=><Content state = {props.state}
-                                                                  addPost = {props.addPost}
-                                                                  sms = {state.sms}
-                                                                  createBllMessage = {props.createBllMessage}/>}></Route>
+                                                                  dispatch = {props.dispatch}
+                                                                  sms = {props.sms}
+                                                                  />}></Route>
                     <Route path="/news" render = {()=><News/>}></Route>
                     <Route path="/music" render = {()=><Music/>}></Route>
                     <Route path="/settings" render = {()=><Settings/>}></Route>

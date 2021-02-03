@@ -5,12 +5,13 @@ import React from 'react';
 const MyPosts =(props)=>{
     let linkTextArea = React.createRef();
     let fn =()=>{
-       let text = linkTextArea.current.value;
-        props.addPost()
+        // props.addPost()
+        props.dispatch({type:'ADD-POST'})
     }
     let fn1=()=>{
         let text = linkTextArea.current.value;
-        props.createBllMessage(text);
+        // props.createBllMessage(text);
+        props.dispatch({type:'UPDATE-NEW-POST-TEXT', message:text,})
     }
     let postRender = props.state.postPage.map(e=><Post post = {e.post} like = {e.like}/>)
     return(
