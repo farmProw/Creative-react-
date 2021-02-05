@@ -59,7 +59,7 @@ export const addPostActionCreator = () =>{
     }
 }
 export const updateNewPostTextActionCreator = (newText)=>
-    ({type: UPDATE_NEW_POST_TEXT + 'T', text: newText})
+    ({type: UPDATE_NEW_POST_TEXT, text: newText})
 
 
 export default store;
