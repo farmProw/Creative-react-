@@ -1,3 +1,5 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 let render = () => {
 };
 const store = {
@@ -50,5 +52,14 @@ const store = {
     },
 
 };
+
+export const addPostActionCreator = () =>{
+    return {
+        type: ADD_POST,
+    }
+}
+export const updateNewPostTextActionCreator = (newText)=>
+    ({type: UPDATE_NEW_POST_TEXT + 'T', text: newText})
+
 
 export default store;

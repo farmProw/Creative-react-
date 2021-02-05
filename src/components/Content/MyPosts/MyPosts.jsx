@@ -1,17 +1,20 @@
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import React from 'react';
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../State/State";
+
+
 
 const MyPosts =(props)=>{
     let linkTextArea = React.createRef();
     let fn =()=>{
         // props.addPost()
-        props.dispatch({type:'ADD-POST'})
+        props.dispatch(addPostActionCreator())
     }
     let fn1=()=>{
         let text = linkTextArea.current.value;
         // props.createBllMessage(text);
-        props.dispatch({type:'UPDATE-NEW-POST-TEXT', message:text,})
+        props.dispatch(updateNewPostTextActionCreator(text))
     }
     let postRender = props.state.postPage.map(e=><Post post = {e.post} like = {e.like}/>)
     return(
