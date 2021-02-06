@@ -5,7 +5,7 @@ import Aside from "./components/Aside/Aside";
 import Content from "./components/Content/Content";
 import Footer from "./components/Footer/Footer";
 import {BrowserRouter, Route} from "react-router-dom";
-import Messages from "./components/Aside/NavBar/NavBarLinks/Messeges";
+import Messages from "./components/Aside/NavBar/NavBarLinks/Messages";
 import Music from "./components/Aside/NavBar/NavBarLinks/Music";
 import Settings from "./components/Aside/NavBar/NavBarLinks/Settings";
 import News from "./components/Aside/NavBar/NavBarLinks/News";
@@ -20,7 +20,7 @@ function App(props) {
                 <Aside state = {props.state}/>
 
                 <div className="wrapper__content">
-                    <Route path="/messages" render = {()=><Messages state = {props.state}
+                    <Route path="/messages" render = {()=><Messages dispatch = {props.dispatch} state = {props.state}
                                                                     />}></Route>
                     <Route path="/profile" render = {()=><Content state = {props.state}
                                                                   dispatch = {props.dispatch}
