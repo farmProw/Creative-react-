@@ -1,5 +1,5 @@
 import React from 'react'
 import ReactDOM from "react-dom";
 import App from "./App";
-import state, {addPost, createBllMessage} from "./redax/State";
+import state, {addPost, createBllMessage} from "./redax/store";
 

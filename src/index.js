@@ -3,8 +3,8 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from "react-dom";
 import App from "./App";
-import store from "./redax/State";
-import {rendi} from './redax/State'
+import store from "./redax/store";
+import {rendi} from './redax/store'
 export const render =()=>{
     ReactDOM.render(
         <React.StrictMode>

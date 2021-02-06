@@ -24,7 +24,7 @@ function App(props) {
                                                                     />}></Route>
                     <Route path="/profile" render = {()=><Content state = {props.state}
                                                                   dispatch = {props.dispatch}
-                                                                  sms = {props.sms}
+                                                                  sms = {props.state.postItems.sms}
                                                                   />}></Route>
                     <Route path="/news" render = {()=><News/>}></Route>
                     <Route path="/music" render = {()=><Music/>}></Route>

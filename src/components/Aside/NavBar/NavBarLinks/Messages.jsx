@@ -1,13 +1,7 @@
 import s from "./Messages.module.css"
 import {NavLink} from "react-router-dom";
 import React from 'react';
-// import  MessagesMini from './MessagesMiniSmS';
-import {
-    addMessageCreator,
-    addPostActionCreator,
-    updateNewMessageText,
-    updateNewPostTextActionCreator
-} from "../../../../redax/State";
+import {addMessageCreator, updateNewMessageText} from "../../../../redax/dialogs-redux";
 
 
 const AuthorMessages=(props)=>{
@@ -23,9 +17,9 @@ const  Sms =(props)=>{
 }
 
 const  Messages =(props)=>{
-console.log(props)
-    let dialogsPage = props.state.dialogsPage.map(e=><AuthorMessages id = {e.id} name = {e.name} img = {e.img}/>);
-    let messagePage = props.state.messagePage.map(e=><Sms sms = {e.message} like={e.like}/>);
+    console.log(props.state.dialogItems.dialogsPage)
+    let dialogsPage = props.state.dialogItems.dialogsPage.map(e=><AuthorMessages id = {e.id} name = {e.name} img = {e.img}/>);
+    let messagePage = props.state.dialogItems.messagePage.map(e=><Sms sms = {e.message} like={e.like}/>);
     let clicker =()=>{
         props.dispatch(addMessageCreator());
     }
@@ -41,7 +35,7 @@ console.log(props)
             <div className={s.sms__box}>
                 {messagePage}
             </div>
-            <textarea  onChange={onChange} value={props.state.newMessageBody}></textarea>
+            <textarea  onChange={onChange} value={props.state.dialogItems.newMessageBody}></textarea>
             <button onClick={clicker}>add</button>
         </div>
     )
