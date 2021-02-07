@@ -11,6 +11,8 @@ import Settings from "./components/Aside/NavBar/NavBarLinks/Settings";
 import News from "./components/Aside/NavBar/NavBarLinks/News";
 import Friends from "./components/Aside/Friends/Friends";
 import React from "react";
+import store from "./redax/redux-store";
+import MessagesContainer from "./components/Aside/NavBar/NavBarLinks/MessagesConteiner";
 
 function App(props) {
     return (
@@ -20,12 +22,9 @@ function App(props) {
                 <Aside state = {props.state}/>
 
                 <div className="wrapper__content">
-                    <Route path="/messages" render = {()=><Messages dispatch = {props.dispatch} state = {props.state}
+                    <Route path="/messages" render = {()=><MessagesContainer store = {props.store}
                                                                     />}></Route>
-                    <Route path="/profile" render = {()=><Content state = {props.state}
-                                                                  dispatch = {props.dispatch}
-                                                                  sms = {props.state.postItems.sms}
-                                                                  />}></Route>
+                    <Route path="/profile" render = {()=><Content store={props.store}/>}></Route>
                     <Route path="/news" render = {()=><News/>}></Route>
                     <Route path="/music" render = {()=><Music/>}></Route>
                     <Route path="/settings" render = {()=><Settings/>}></Route>

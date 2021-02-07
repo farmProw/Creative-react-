@@ -17,15 +17,14 @@ const  Sms =(props)=>{
 }
 
 const  Messages =(props)=>{
-    console.log(props.state.dialogItems.dialogsPage)
-    let dialogsPage = props.state.dialogItems.dialogsPage.map(e=><AuthorMessages id = {e.id} name = {e.name} img = {e.img}/>);
-    let messagePage = props.state.dialogItems.messagePage.map(e=><Sms sms = {e.message} like={e.like}/>);
+    let dialogsPage = props.dialogItems.dialogsPage.map(e=><AuthorMessages id = {e.id} name = {e.name} img = {e.img}/>);
+    let messagePage = props.dialogItems.messagePage.map(e=><Sms sms = {e.message} like={e.like}/>);
     let clicker =()=>{
-        props.dispatch(addMessageCreator());
+        props.addPost();
     }
     let onChange=(e)=>{
      let text = e.target.value;
-     props.dispatch(updateNewMessageText(text))
+     props.createBllMessage(text)
     }
     return(
         <div className={s.messages}>
@@ -35,7 +34,7 @@ const  Messages =(props)=>{
             <div className={s.sms__box}>
                 {messagePage}
             </div>
-            <textarea  onChange={onChange} value={props.state.dialogItems.newMessageBody}></textarea>
+            <textarea  onChange={onChange} value={props.dialogItems.newMessageBody}></textarea>
             <button onClick={clicker}>add</button>
         </div>
     )

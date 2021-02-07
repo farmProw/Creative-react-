@@ -1,32 +1,27 @@
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import React from 'react';
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redax/posts-redux";
 
 
 
+const MyPosts = (props) => {
 
-const MyPosts =(props)=>{
-
-
-    let linkTextArea = React.createRef();
-    let fn =()=>{
-        // props.addPost()
-        props.dispatch(addPostActionCreator())
+    let btnClick = () => {
+        props.addPost()
     }
-    let fn1=()=>{
-        let text = linkTextArea.current.value;
-        // props.createBllMessage(text);
-        props.dispatch(updateNewPostTextActionCreator(text))
+    let textAreaChange = (e) => {
+        let text = e.target.value;
+        props.createBllMessage(text);
+
     }
-    let postRender = props.state.postItems.postPage.map(e=><Post post = {e.post} like = {e.like}/>)
-    return(
+    let postRender = props.postItems.postPage.map(e => <Post post={e.post} like={e.like}/>)
+    return (
         <div className="MyPosts">
             <h2>My post</h2>
-            <textarea onChange={fn1} value={props.state.postItems.sms} ref={linkTextArea}></textarea>
-            <button onClick={fn}>Add Post</button>
+            <textarea onChange={textAreaChange} value={props.postItems.sms} ></textarea>
+            <button onClick={btnClick}>Add Post</button>
             {postRender}
         </div>
-)
+    )
 }
 export default MyPosts;

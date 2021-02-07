@@ -1,6 +1,15 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const postRedux =(state,active)=>{
+
+let initialState = {
+    postPage: [
+        {post: "I learn js", like: "15"},
+        {post: "its not simpl", like: "13"},
+    ],
+    sms: '',
+}
+
+const postRedux =(state = initialState,active)=>{
     switch (active.type) {
         case 'ADD-POST':
             let posts = {
