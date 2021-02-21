@@ -19,18 +19,19 @@ let initialState = {
 }
 
 const dialogsRedux =(state = initialState, active)=>{
+
     switch (active.type) {
         case 'ADD-MESSAGE':
-            let body = state.newMessageBody
-
-            // img: "https://academiait.ru/wp-content/uploads/2017/06/765-4-650x388.jpg"
-
-            state.messagePage.push({message: body, like: 1})
-            state.newMessageBody = '';
-            return state;
+           return{
+               ...state,
+               messagePage: [...state.messagePage,{message: state.newMessageBody, like: 1}],
+               newMessageBody:'',
+           }
         case 'UPDATE-NEW-MESSAGE-TEXT':
-            state.newMessageBody = active.message;
-            return state;
+          return {
+              ...state,
+              newMessageBody: active.message,
+          }
         default:return state;
     }
     return state

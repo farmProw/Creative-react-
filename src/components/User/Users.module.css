@@ -1,0 +1,9 @@
+.img__wrapper img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.pagination__number{
+    font-weight: 900;
+    font-size: 1.2em;
+}

@@ -17,14 +17,15 @@ const  Sms =(props)=>{
 }
 
 const  Messages =(props)=>{
+
     let dialogsPage = props.dialogItems.dialogsPage.map(e=><AuthorMessages id = {e.id} name = {e.name} img = {e.img}/>);
     let messagePage = props.dialogItems.messagePage.map(e=><Sms sms = {e.message} like={e.like}/>);
     let clicker =()=>{
-        props.addPost();
+        props.fn1();
     }
     let onChange=(e)=>{
      let text = e.target.value;
-     props.createBllMessage(text)
+     props.fn2(text)
     }
     return(
         <div className={s.messages}>

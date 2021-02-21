@@ -10,18 +10,19 @@ let initialState = {
 }
 
 const postRedux =(state = initialState,active)=>{
+
     switch (active.type) {
         case 'ADD-POST':
-            let posts = {
-                post: state.sms,
-                like: 0,
-            }
-            state.postPage.push(posts);
-            state.sms = '';
-            return state;
+       return {
+           ...state,
+           postPage:[...state.postPage,{post:state.sms,like:88}],
+           sms:"",
+       }
         case 'UPDATE-NEW-POST-TEXT':
-            state.sms = active.message;
-            return state;
+            return{
+                ...state,
+                sms:active.message,
+            }
         default:return state;
     }
     return state

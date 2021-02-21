@@ -7,11 +7,11 @@ import React from 'react';
 const MyPosts = (props) => {
 
     let btnClick = () => {
-        props.addPost()
+        props.fn1()
     }
     let textAreaChange = (e) => {
         let text = e.target.value;
-        props.createBllMessage(text);
+        props.fn2(text);
 
     }
     let postRender = props.postItems.postPage.map(e => <Post post={e.post} like={e.like}/>)
