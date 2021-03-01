@@ -1,6 +1,7 @@
 import s from './Post.module.css';
 
 const Post =(props)=>{
+    // debugger
     return(
         <div className={s.post}>
         <img className={s.image} src="https://facegen.com/images/main_face.jpg"/>

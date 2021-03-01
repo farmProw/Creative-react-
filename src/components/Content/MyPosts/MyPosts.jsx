@@ -1,20 +1,18 @@
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import React from 'react';
-
 
 
 const MyPosts = (props) => {
 
     let btnClick = () => {
-        props.fn1()
+        props.addPostActionCreator()
     }
     let textAreaChange = (e) => {
         let text = e.target.value;
-        props.fn2(text);
+        props.updateNewPostTextActionCreator(text);
 
     }
-    let postRender = props.postItems.postPage.map(e => <Post post={e.post} like={e.like}/>)
+    let postRender = props.postPage.map(e => <Post {...props} post={e.post} like={e.like}/>)
     return (
         <div className="MyPosts">
             <h2>My post</h2>

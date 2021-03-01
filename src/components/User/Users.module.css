@@ -3,7 +3,11 @@
     height: 100px;
     border-radius: 50%;
 }
-.pagination__number{
+.numer__box{
     font-weight: 900;
     font-size: 1.2em;
+
+}
+.numer{
+    padding-right: 2px;
 }

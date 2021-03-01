@@ -1,73 +1,52 @@
-import React from 'react'
+import userIcon from '../../assets/images/user.png';
+import s from './Users.module.css';
+import {NavLink} from "react-router-dom";
 import axios from "axios";
-import s from './Users.module.css'
-import userIcon from './../../assets/images/user.png'
-class Users extends React.Component {
+import {usersAPI} from "../../api/api";
 
-    // constructor(props) {
-    //     super(props);
-    //
-    // }
+const User = (props) => {
+    // debugger
+    let number = Math.ceil(props.pageTotal / props.pageSize);
+    let arr = [];
+    for (let i = 1; i <= number; i++) arr.push(i);
 
-    componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(
-            response => {
-                console.log(response)
-                this.props.usersCreatorAC(response.data.items);
-                this.props.userTotalCountAC(response.data.totalCount);
-            }
-        )
-    }
-    changePage(p){
-        this.props.userPageCurrentAC(p);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`).then(
-            response => {
-                console.log(response)
-                this.props.usersCreatorAC(response.data.items);
-                this.props.userTotalCountAC(response.data.totalCount);
-            }
-        )
-    }
-    render() {
-        let number =Math.ceil(this.props.pageTotal/this.props.pageSize);
-        let arr=[];
-        for(let i = 1; i<=number; i++){
-            arr.push(i);
-
-        }
-        return (
-            <div className={s.user__wrapper}>
-                <div className={s.wrapper__pagination}>
-                    {arr.map(p=>{
-                        // this.props.userPageCurrentAC(p)
-                        return(
-                            <span className={p===this.props.pageCurrent&& s.pagination__number} onClick={()=>this.changePage(p)}>{p}</span>
-                        )
-                    })}
-                </div>
-                {this.props.users.map(u => {
-                    return (
-                        <div>
-                            <div className={s.img__wrapper}>
-                                <img src={u.photos.small?u.photos.small:userIcon} alt=""/>
-                            </div>
-                                <div>
-                                    {u.followed ?
-                                        <button onClick={() => this.props.userUnFollowAC(u.id)}>UNFOLLOW</button> :
-                                        <button onClick={() => this.props.userFollowAC(u.id)}>FOLLOW</button>
-                                    }
-                                </div>
-                            <div>{u.name}</div>
-                                <div>s</div>
-                                <div>city</div>
+    return (<div>
+        {arr.map(p => <span className={props.pageCurrent === p && s.numer__box} onClick={()=>props.startPagination(p)}>{p}</span>)}
+        {props.users.map(u => {
+            return (
+                <div>
+                    <div className={s.img__wrapper}>
+                        <NavLink to={'/profile/'+u.id}><img src={u.photos.small||userIcon} alt=""/></NavLink>
                         </div>
-                    )
-                })}
-            </div>
-        )
-    }
+                    {u.followed?
+                        <button disabled={props.UsersId.some(e=>e==u.id)} onClick={()=>{
+                            props.userBtnLoad(true,u.id);
+                            usersAPI.unFollow(u.id).then(data =>{
+                                if(data.resultCode==0){
+                                    props.userUnFollow(u.id)
+                                }
+                                    props.userBtnLoad(false,u.id);
+                            }
+                            )
+                            }}>UNFOLLOW</button>:
+
+                        <button disabled={props.UsersId.some(e=>e==u.id)} onClick={()=>{
+                            props.userBtnLoad(true,u.id);
+                            usersAPI.follow(u.id).then(data=>{
+                                if(data.resultCode==0){
+                                    props.userFollow(u.id)
+                                }
+                                props.userBtnLoad(false,u.id);
+                            })
+
+                        }}>FOLLOW</button>
+                    }
+                    <div>{u.name}</div>
+                </div>)
+        })}
+    </div>)
+
+
 }
 
-
-export default Users;
-
+export default User;
