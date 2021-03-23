@@ -2,18 +2,24 @@ import s from './Content.module.css';
 import Content from "./Content";
 import * as React from "react";
 import axios from "axios";
-import {withRouter} from "react-router";
+import {Redirect, withRouter} from "react-router";
 import {connect} from "react-redux";
-import {addPostActionCreator, createProfile, updateNewPostTextActionCreator} from "../../redax/posts-redux";
+import {
+    addPostActionCreator,
+    createProfile,
+    getThunkCreateProfile, setThunkStatusCreator,
+    updateThunkStatusCreator
+} from "../../redax/posts-redux";
+import RedirectLogin from "../hoc/RedirectLogin";
+import {compose} from "redux";
 
 
 class ContentContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        userId = userId?userId:2;
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(
-            response => this.props.createProfile(response.data)
-        )
+        userId = userId ? userId : 15221;
+        this.props.getThunkCreateProfile(userId);
+        this.props.setThunkStatusCreator(userId);
     }
 
     render() {
@@ -24,14 +30,28 @@ class ContentContainer extends React.Component {
 let mapStateToProps = (state) => {
 // debugger
     return {
-        postItems:state.postItems,
-        profile:state.postItems.profile,
-        postPage:state.postItems.postPage,
+        postItems: state.postItems,
+        profile: state.postItems.profile,
+        postPage: state.postItems.postPage,
+        status: state.postItems.status,
     }
 }
-let PostRouterComponent = withRouter(ContentContainer);
-export default connect(mapStateToProps, {
-    updateNewPostTextActionCreator,
-    addPostActionCreator,
-    createProfile,
-})(PostRouterComponent);
+// let authRedirect = RedirectLogin(ContentContainer)
+export default compose(
+    connect(mapStateToProps, {
+        addPostActionCreator,
+        createProfile,
+        getThunkCreateProfile,
+        setThunkStatusCreator,
+        updateThunkStatusCreator,
+    }),
+    withRouter,
+     RedirectLogin,
+)(ContentContainer);
+// let PostRouterComponent = withRouter(RedirectLogin(ContentContainer));
+// export default connect(mapStateToProps, {
+//     updateNewPostTextActionCreator,
+//     addPostActionCreator,
+//     createProfile,
+//     getThunkCreateProfile,
+// })(PostRouterComponent);

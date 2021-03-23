@@ -1,5 +1,5 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+// const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 let initialState = {
     dialogsPage: [
@@ -15,7 +15,6 @@ let initialState = {
         {message: "how are you skini", like: 1},
         {message: "i fill my on 88 percent", like: 1},
     ],
-    newMessageBody: '',
 }
 
 const dialogsRedux =(state = initialState, active)=>{
@@ -24,22 +23,16 @@ const dialogsRedux =(state = initialState, active)=>{
         case 'ADD-MESSAGE':
            return{
                ...state,
-               messagePage: [...state.messagePage,{message: state.newMessageBody, like: 1}],
-               newMessageBody:'',
+               messagePage: [...state.messagePage,{message: active.payload, like: 1}],
            }
-        case 'UPDATE-NEW-MESSAGE-TEXT':
-          return {
-              ...state,
-              newMessageBody: active.message,
-          }
         default:return state;
     }
     return state
 }
 
-export const addMessageCreator=()=>({type:ADD_MESSAGE});
+export const addMessageCreator=(payload)=>({type:ADD_MESSAGE,payload});
 
-export const updateNewMessageText =(newMessage)=>
-    ({type:UPDATE_NEW_MESSAGE_TEXT,message:newMessage});
+// export const updateNewMessageText =(newMessage)=>
+//     ({type:UPDATE_NEW_MESSAGE_TEXT,message:newMessage});
 
 export default dialogsRedux;

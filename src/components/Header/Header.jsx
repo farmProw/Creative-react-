@@ -5,7 +5,7 @@ const Header =(props)=>{
     return(
        <header className={s.header}>
            <img src="https://memegenerator.net/img/instances/64572741.jpg" className={s.imge}/>
-           {props.isAuth?props.user:<NavLink to='/login'>Login</NavLink>}
+           {props.isAuth?<span><span>{props.user}</span><button onClick={props.Logout}>LOGOUT</button></span>:<NavLink to='/login'>LOGIN</NavLink>}
        </header>
     )
 }

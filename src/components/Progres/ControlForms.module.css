@@ -1,0 +1,6 @@
+.formWrapper.error{
+    border: 2px solid red;
+}
+.formWrapper.error span{
+    color: red;
+}

@@ -10,6 +10,8 @@ import React from "react";
 import MessagesContainer from "./components/Aside/NavBar/NavBarLinks/MessagesConteiner";
 import ContentContainer from "./components/Content/ContentContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import LoginPage from "../src/components/Login/Login"
+
 
 function App(props) {
     return (
@@ -25,6 +27,7 @@ function App(props) {
                     <Route path="/music" render = {()=><Music/>}></Route>
                     <Route path="/settings" render = {()=><Settings/>}></Route>
                     <Route path="/friends" render = {()=><Friends />}></Route>
+                   <Route path='/login' render = {()=><LoginPage/>}></Route>
                 </div>
                 <Footer/>
             </div>

@@ -1,8 +1,7 @@
 import userIcon from '../../assets/images/user.png';
 import s from './Users.module.css';
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {usersAPI} from "../../api/api";
+
 
 const User = (props) => {
     // debugger
@@ -20,26 +19,10 @@ const User = (props) => {
                         </div>
                     {u.followed?
                         <button disabled={props.UsersId.some(e=>e==u.id)} onClick={()=>{
-                            props.userBtnLoad(true,u.id);
-                            usersAPI.unFollow(u.id).then(data =>{
-                                if(data.resultCode==0){
-                                    props.userUnFollow(u.id)
-                                }
-                                    props.userBtnLoad(false,u.id);
-                            }
-                            )
-                            }}>UNFOLLOW</button>:
+                          props.Unfollow(u.id)}}>UNFOLLOW</button>:
 
                         <button disabled={props.UsersId.some(e=>e==u.id)} onClick={()=>{
-                            props.userBtnLoad(true,u.id);
-                            usersAPI.follow(u.id).then(data=>{
-                                if(data.resultCode==0){
-                                    props.userFollow(u.id)
-                                }
-                                props.userBtnLoad(false,u.id);
-                            })
-
-                        }}>FOLLOW</button>
+                         props.Follow(u.id)}}>FOLLOW</button>
                     }
                     <div>{u.name}</div>
                 </div>)
